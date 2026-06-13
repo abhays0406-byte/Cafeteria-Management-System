@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Menu - Cafeteria</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="logo">Cafeteria</div>
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="cart.html">Cart</a>
+        <a href="form.html">Feedback Form</a>
+    </div>
+    <div id="notification"></div>
+    
+    <h1 class="page-title">Our Menu</h1>
+
+    <div class="menu-controls">
+        <input type="text" id="searchInput" class="search-bar" placeholder="Search for food..." onkeyup="filterMenu()">
+        <button class="category-btn active" onclick="filterCategory('all')">All</button>
+        <button class="category-btn" onclick="filterCategory('fast-food')">Fast Food</button>
+        <button class="category-btn" onclick="filterCategory('beverage')">Beverages</button>
+        <button class="category-btn" onclick="filterCategory('dessert')">Desserts</button>
+    </div>
+
+    <div class="menu-container" id="menuContainer">
+        <div class="item-card" data-category="fast-food">
+            <img src="burger.jpg" alt="Burger" class="food-img">
+            <h3>Burger</h3>
+            <p>₹80</p>
+            <button class="add-btn" onclick="addToCart('Burger', 80)">Add to Cart</button>
+        </div>
+
+        <div class="item-card" data-category="fast-food">
+            <img src="pizza.jpg" alt="Pizza" class="food-img">
+            <h3>Pizza</h3>
+            <p>₹120</p>
+            <button class="add-btn" onclick="addToCart('Pizza', 120)">Add to Cart</button>
+        </div>
+
+        <div class="item-card" data-category="fast-food">
+            <img src="fries.jpg" alt="French Fries" class="food-img">
+            <h3>French Fries</h3>
+            <p>₹50</p>
+            <button class="add-btn" onclick="addToCart('French Fries', 50)">Add to Cart</button>
+        </div>
+
+        <div class="item-card" data-category="beverage">
+            <img src="coffee.jpg" alt="Coffee" class="food-img">
+            <h3>Coffee</h3>
+            <p>₹30</p>
+            <button class="add-btn" onclick="addToCart('Coffee', 30)">Add to Cart</button>
+        </div>
+
+        <div class="item-card" data-category="fast-food">
+            <img src="momo.jpg" alt="Momos" class="food-img">
+            <h3>Momos</h3>
+            <p>₹60</p>
+            <button class="add-btn" onclick="addToCart('Momos', 60)">Add to Cart</button>
+        </div>
+
+        <div class="item-card" data-category="fast-food">
+            <img src="noodles.jpg" alt="Noodles" class="food-img">
+            <h3>Noodles</h3>
+            <p>₹80</p>
+            <button class="add-btn" onclick="addToCart('Noodles', 80)">Add to Cart</button>
+        </div>
+
+        <div class="item-card" data-category="fast-food">
+            <img src="sw.jpg" alt="Sandwich" class="food-img">
+            <h3>Sandwich</h3>
+            <p>₹50</p>
+            <button class="add-btn" onclick="addToCart('Sandwich', 50)">Add to Cart</button>
+        </div>
+
+        <div class="item-card" data-category="beverage">
+            <img src="shakes.jpg" alt="Shakes" class="food-img">
+            <h3>Shakes</h3>
+            <p>₹50</p>
+            <button class="add-btn" onclick="addToCart('Shakes', 50)">Add to Cart</button>
+        </div>
+
+        <div class="item-card" data-category="dessert">
+            <img src="cupcakes.jpg" alt="Cupcakes" class="food-img">
+            <h3>Cupcakes</h3>
+            <p>₹50</p>
+            <button class="add-btn" onclick="addToCart('Cupcakes', 50)">Add to Cart</button>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-bottom: 50px;">
+        <a href="cart.html" class="btn">Go to Cart</a>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

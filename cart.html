@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Cart - Cafeteria</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="logo">Cafeteria</div>
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="cart.html">Cart</a>
+        <a href="form.html">Feedback Form</a>
+    </div>
+    
+    <div id="notification"></div>
+    
+    <h1 class="page-title">Your Cart</h1>
+
+    <div id="cart-items" class="cart-container"></div>
+
+    <h2 id="total" class="total-box">Total: ₹0</h2>
+
+    <div class="action-buttons">
+        <button class="btn" onclick="placeOrder()" style="margin-right: 15px;">Place Order</button>
+        <a href="form.html" class="btn">Feedback Form</a>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

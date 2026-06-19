@@ -56,9 +56,9 @@ function removeItem(index) {
     loadCart();
 }
 
-function placeOrder() {
+async function placeOrder() {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    
+
     if (cart.length === 0) {
         alert("Your cart is empty!");
         return;
@@ -69,14 +69,25 @@ function placeOrder() {
         total += item.itemPrice;
     });
 
-    // Simulate API call for purely frontend behavior
-    setTimeout(() => {
-        showNotification("Your order has been placed!");
-        localStorage.removeItem("cart");
-        setTimeout(() => {
-            window.location.href = "index.html";
-        }, 1000);
-    }, 500);
+    try {
+        const response = await fetch('/api/orders', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ items: cart, total }),
+        });
+
+        if (response.ok) {
+            showNotification("Your order has been placed!");
+            localStorage.removeItem("cart");
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 1000);
+        } else {
+            alert("Failed to place order. Please try again.");
+        }
+    } catch (err) {
+        alert("Failed to place order. Please try again.");
+    }
 }
 
 // Menu Filtering and Searching Logic

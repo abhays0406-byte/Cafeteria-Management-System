@@ -94,7 +94,9 @@
                 <input type="radio" name="rating" id="star1"><label for="star1">&#9733;</label>
             </div>
 
-            <form>
+            <form name="feedback" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                <input type="hidden" name="form-name" value="feedback">
+                <p style="display:none"><label>Don't fill this: <input name="bot-field"></label></p>
                 <div class="form-group">
                     <label>Full Name:</label>
                     <input type="text" name="name" required>
@@ -116,6 +118,7 @@
                     <label>Feedback / Suggestions:</label>
                     <textarea name="feedback" rows="4" placeholder="Write your feedback here..."></textarea>
                 </div>
+                <input type="hidden" name="rating" id="ratingHidden" value="">
                 <button type="submit" class="btn" style="width: 100%;">Submit Feedback</button>
             </form>
         </div>
@@ -125,34 +128,38 @@
     document.addEventListener("DOMContentLoaded", () => {
         const form = document.querySelector("form");
         const ratingInputs = document.querySelectorAll("input[name='rating']");
-        
-        form.addEventListener("submit", (e) => {
-            e.preventDefault(); 
-            
-            let ratingValue = "";
-            ratingInputs.forEach(input => {
-                if (input.checked) ratingValue = input.id.replace("star", "");
-            });
+        const ratingHidden = document.getElementById("ratingHidden");
 
-            if (ratingValue === "") {
+        ratingInputs.forEach(input => {
+            input.addEventListener("change", () => {
+                ratingHidden.value = input.id.replace("star", "");
+            });
+        });
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            if (!ratingHidden.value) {
                 alert("Please select a star rating!");
                 return;
             }
 
-            const feedbackData = {
-                name: form.name.value.trim(),
-                email: form.email.value.trim(),
-                quality: form.quality.value,
-                feedback: form.feedback.value.trim(),
-                rating: parseInt(ratingValue)
-            };
+            const formData = new FormData(form);
 
-            // Simulate backend submission for purely frontend behavior
-            setTimeout(() => {
+            const response = await fetch("/", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams(formData).toString(),
+            });
+
+            if (response.ok) {
                 alert("Thank you! Your feedback has been submitted 😊");
                 form.reset();
+                ratingHidden.value = "";
                 setTimeout(() => { window.location.href = "index.html"; }, 100);
-            }, 500);
+            } else {
+                alert("Submission failed. Please try again.");
+            }
         });
     });
     </script>
